@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Detalhes da cidade</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>
+        Cidade: {{ city.name }}  
+      </ion-card-title>  
+      <p> Uma cidade maravilhosa. </p>      
+    </ion-card-content>
+    <ion-item> Temperatura: {{ city.temp }}ºC </ion-item>
+    <ion-item> {{ city.clouds}}% de nuvens </ion-item>
+    <ion-item> Latitude: {{ city.lat }} </ion-item>
+    <ion-item> Longitude: {{ city.lon }} </ion-item>
+  </ion-card>
+</ion-content>
+
+<ion-list>
+    <button ion-item *ngFor="let item of items" (click)="cityDetails(item)">
+      <strong>{{item.name}}</strong>&emsp;{{item.weatherDeion}}<br/>
+        <h1><ion-icon [name]="item.weatherIcon"></ion-icon>&emsp;{{item.temp | number: '1.0-0'}}ºC <small>&emsp; Vento: {{item.windDir}} {{item.windSpd | number: '1.0-0'}} km/h</small></h1>
+    </button>
+  </ion-list>

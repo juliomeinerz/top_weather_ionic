@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cidades favoritas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="cities?.length > 0">
+    <ion-list *ngFor="let city of cities">
+      <ion-item>
+        {{city.name}}
+        <ion-icon name="trash" md="md-trash" (click)="removeFromFavorites(city.id)" item-right></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="cities?.length <= 0">
+    Nenhuma cidade encontrada.
+  </div>
+  <div *ngIf="error?.length > 0">
+    {{error}}
+  </div>
+</ion-content>
