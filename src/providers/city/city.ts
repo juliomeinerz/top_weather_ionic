@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 
@@ -8,7 +7,6 @@ export class CityProvider {
 
   constructor(
     public storage: Storage,
-    public http: Http
   ) {}
 
   // Retorna o código das cidades salvas no storage
