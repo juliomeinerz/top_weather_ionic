@@ -13,7 +13,6 @@ import { CityDetailsPage } from './../pages/city-details/city-details';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CityProvider } from '../providers/city/city';
-import { WeatherProvider } from '../providers/weather/weather';
 import { OpenWeatherProvider } from '../providers/open-weather/open-weather';
 
 @NgModule({
@@ -43,7 +42,6 @@ import { OpenWeatherProvider } from '../providers/open-weather/open-weather';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CityProvider,
-    WeatherProvider,
     OpenWeatherProvider
   ]
 })

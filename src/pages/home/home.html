@@ -6,16 +6,21 @@
 
 <ion-content padding>
   <ion-title> Insira o nome de uma cidade </ion-title>
-  <ion-item>
-    <ion-label floating>Cidade</ion-label>
-    <ion-input type="text" [(ngModel)]="cityName"></ion-input>
-  </ion-item>
-  <button ion-button (click)="getCityData(this.cityName)">Pesquisar</button>
-  <ion-list *ngFor="let city of citiesFound">
-      <button ion-item (click)="cityDetails(city)">
-        {{ city.name }}, {{city.country}}
-        <ion-icon name="add" md="md-add" (click)="saveCity(city.id)" item-right></ion-icon>
-        <ion-icon name="trash" md="md-trash" item-right></ion-icon>
-      </button>
-    </ion-list>
+  <ion-list>
+    <ion-item class="search-bar">
+      <ion-input placeholder="Cidade" type="text" [(ngModel)]="cityName"></ion-input>
+    </ion-item>
+    <button class="btn-search" ion-button (click)="getCityData(this.cityName)">Pesquisar</button>
+  </ion-list>
+  <ion-list no-lines *ngFor="let city of citiesFound">
+    <ion-item no-lines>
+      <strong>
+        {{city.name}}, {{city.country}}
+      </strong>
+      &emsp;{{city.description}}
+      <br>
+      <h1> <ion-icon [name]="city.weatherIcon"></ion-icon> &emsp;{{city.temp | number: '1.0-0'}}ºC </h1>
+      <ion-icon name="add" md="md-add" (click)="saveCity(city)" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
 </ion-content>

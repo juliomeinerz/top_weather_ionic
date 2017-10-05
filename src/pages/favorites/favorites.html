@@ -1,18 +1,20 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>Cidades favoritas</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <div *ngIf="cities?.length > 0">
     <ion-list *ngFor="let city of cities">
-      <ion-item>
-        {{city.name}}
-        <ion-icon name="trash" md="md-trash" (click)="removeFromFavorites(city.id)" item-right></ion-icon>
+      <ion-item no-lines (click)="cityDetails(city)">
+        <strong>
+          {{city.name}}, {{city.country}}
+        </strong>
+        &emsp;{{city.description}}
+        <br>
+        <h1> <ion-icon [name]="city.weatherIcon"></ion-icon> &emsp;{{city.temp | number: '1.0-0'}}ºC </h1>
+        <ion-icon name="trash" md="md-trash" on-tap="removeFromFavorites(city.id)" item-right></ion-icon>
       </ion-item>
     </ion-list>
   </div>

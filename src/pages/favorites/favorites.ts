@@ -1,10 +1,10 @@
-import { OpenWeatherCity } from './../../models/openWeatherCity.model';
-import { OpenWeatherProvider } from './../../providers/open-weather/open-weather';
-import { Http } from '@angular/http';
-import { CityProvider } from './../../providers/city/city';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { CityDetailsPage } from './../city-details/city-details';
+import { OpenWeatherCity } from './../../models/openWeatherCity.model';
+import { OpenWeatherProvider } from './../../providers/open-weather/open-weather';
+import { CityProvider } from './../../providers/city/city';
 
 @IonicPage()
 @Component({
@@ -25,7 +25,13 @@ export class FavoritesPage {
     public alert: AlertController
   ) {}
 
-  getFavoriteCities() {
+  cityDetails(city: OpenWeatherCity) {
+    this.navCtrl.push(CityDetailsPage, {
+      city: city
+    });
+  }
+
+  getFavoriteCities(loading) {
     this.cityProvider.getCityList()
     .then((cities) => {
       cities.map((city) => {
@@ -38,6 +44,9 @@ export class FavoritesPage {
 
       this.openWeatherProvider.getCityInfoByCode(this.cities).then((res) => {
         this.cities = res;
+
+        if (loading)
+          loading.dismiss();
       });
     })
     .catch(() => {
@@ -62,7 +71,7 @@ export class FavoritesPage {
             .then(() => {
               loading.dismiss();
               this.cities = [];
-              this.getFavoriteCities();
+              this.getFavoriteCities("");
             })
             .catch(() => {
               loading.dismiss();
@@ -83,7 +92,7 @@ export class FavoritesPage {
       content: 'Carregando a lista de cidades favoritas...'
     })
     loading.present();
-    this.getFavoriteCities();
-    loading.dismiss();
+
+    this.getFavoriteCities(loading);
   }
 }

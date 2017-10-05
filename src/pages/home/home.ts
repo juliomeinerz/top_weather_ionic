@@ -1,10 +1,9 @@
-import { OpenWeatherProvider } from './../../providers/open-weather/open-weather';
-import { CityProvider } from './../../providers/city/city';
 import { OpenWeatherCity } from './../../models/openWeatherCity.model';
-import { CityDetailsPage } from '../city-details/city-details';
-import { Component, Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController } from 'ionic-angular';
-import { Http, Headers, RequestOptions, HttpModule } from '@angular/http';
+import { CityProvider } from './../../providers/city/city';
+import { OpenWeatherProvider } from './../../providers/open-weather/open-weather';
 import 'rxjs/Rx';
 
 @Component({
@@ -24,6 +23,9 @@ export class HomePage {
   ) {}
 
   getCityData(city: string) {
+    if (!city || !city.length)
+      return;
+
     let loading = this.loading.create({
       content: 'Aguarde um momento...'
     });
@@ -38,16 +40,10 @@ export class HomePage {
     loading.dismiss();
   }
 
-  cityDetails(city: OpenWeatherCity) {
-    this.navCtrl.push(CityDetailsPage, {
-      city: city
-    });
-  }
-
-  saveCity(city:number) {
+  saveCity(city:OpenWeatherCity) {
     let alert = this.alert.create({
       title: 'Adicionar aos favoritos',
-      message: 'Você deseja adicionar esta cidade aos seus favoritos?',
+      message: 'Você deseja adicionar ' + city.name + ' às suas cidades favoritas?',
       buttons: [
         {
           text: 'Sim',
@@ -57,7 +53,7 @@ export class HomePage {
             })
             loading.present();
 
-            this.cityProvider.save(city)
+            this.cityProvider.save(city.id)
             .then((res) => {
               this.cityProvider.getCityList();
               loading.dismiss();

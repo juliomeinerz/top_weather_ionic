@@ -8,7 +8,7 @@ export class OpenWeatherCity {
   lat: string;
   lon: string;
   weatherCondition: string;
-  weatherDeion: string;
+  weatherDescription: string;
   weatherIconName: string;
   weatherIcon: string;
   temp: string;
@@ -20,7 +20,7 @@ export class OpenWeatherCity {
   windDir: string;
   clouds: string;
   sunrise: string;
-  sunset: string; 
+  sunset: string;
 
   constructor() {}
 }

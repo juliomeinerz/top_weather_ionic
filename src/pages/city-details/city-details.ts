@@ -19,8 +19,4 @@ export class CityDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.city = navParams.get("city");
   }
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CityDetailsPage');
-  }
-
 }
